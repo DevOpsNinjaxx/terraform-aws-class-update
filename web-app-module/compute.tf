@@ -74,7 +74,7 @@ resource "aws_instance" "web_server" {
                  sudo apt update -y
                  sudo apt install apache2 -y
                  sudo systemctl start apache2
-                 sudo bash -c 'echo "<h1>Terrfaform Website</h1> from" $(hostname -f) > /var/www/html/index.html'
+                 sudo bash -c 'echo "<h1>Terraform Website</h1> from" $(hostname -f) > /var/www/html/index.html'
                  EOF
 
   tags = {
@@ -90,7 +90,7 @@ resource "aws_instance" "web_server" {
 }
 
 resource "aws_lb" "web-app-loadbalancer" {
-  name               = "${var.app_name}-web-app-lb"
+  name               = "${var.environment_name}-web-app-lb"
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.loadbalancer-SG.id]
@@ -102,12 +102,12 @@ resource "aws_lb" "web-app-loadbalancer" {
 }
 
 resource "aws_lb_target_group" "web-app-loadbalancer-TG" {
-  name     = "loadbalancer-TG-${var.app_name}"
+  name     = "lb-TG-${var.app_name}"
   port     = 80
   protocol = "HTTP"
   vpc_id   = aws_vpc.my-custom-vpc.id
   tags = {
-    Name = "web-app-loadbalancer-TG"
+    Name = "lb-TG-${var.app_name}"
     environment = var.environment_name
   }
 }

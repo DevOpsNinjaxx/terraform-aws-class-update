@@ -33,8 +33,11 @@ variable "db_user" {
   default = "admin"
 }
 
+#Uncomment to use 
+
 #variable "db_pass" {
 #  type = string
+#  sensitive = true
 #}
 
 variable "bucket" {

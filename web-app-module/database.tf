@@ -1,3 +1,5 @@
+#Uncomment to provision RDS
+
 #resource "aws_db_instance" "web-app-db" {
 #  allocated_storage    = 10
 #  name                 = "var.db_name"
@@ -10,4 +12,3 @@
 #  parameter_group_name = "default.mysql5.7"
 #  skip_final_snapshot  = true
 #}
-

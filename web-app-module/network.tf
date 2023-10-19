@@ -12,7 +12,7 @@
 resource "aws_vpc" "my-custom-vpc" {
   cidr_block = "192.0.0.0/16"
   tags = {
-    Name = "my-custom-vpc"
+    Name = "my-custom-vpc-${var.environment_name}"
   }
 }
 
@@ -33,7 +33,7 @@ resource "aws_internet_gateway" "internet-gw" {
   vpc_id = aws_vpc.my-custom-vpc.id
 
   tags = {
-    Name = "internet-gw"
+    Name = "internet-gw-${var.environment_name}"
     environment = var.environment_name
   }
 }
@@ -49,7 +49,7 @@ resource "aws_route_table" "public-RT" {
   }
 
   tags = {
-    Name = "public-RT-${count.index}"
+    Name = "public-RT-${count.index}-${var.environment_name}}"
     environment = var.environment_name
   }
 }
